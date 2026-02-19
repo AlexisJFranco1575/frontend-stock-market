@@ -1,0 +1,41 @@
+<main class="min-h-screen bg-gray-100 flex flex-col items-center justify-center font-sans">
+  <div class="bg-white p-8 rounded-xl shadow-lg text-center max-w-md w-full">
+    <h2 class="text-3xl font-extrabold text-gray-800 mb-6">Iniciar Sesión 🔐</h2>
+    
+    <form (ngSubmit)="onLogin()" class="space-y-4 text-left">
+      
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">Usuario</label>
+        <input 
+          type="text" 
+          name="username"
+          [(ngModel)]="credentials.username" 
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+          placeholder="Ej: FrancoAzure"
+          required>
+      </div>
+
+      <div>
+        <label class="block text-gray-700 font-semibold mb-2">Contraseña</label>
+        <input 
+          type="password" 
+          name="password"
+          [(ngModel)]="credentials.password" 
+          class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+          placeholder="********"
+          required>
+      </div>
+
+      @if (errorMessage) {
+        <p class="text-red-500 text-sm font-semibold">{{ errorMessage }}</p>
+      }
+
+      <button 
+        type="submit" 
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-4 rounded-lg transition duration-300 transform hover:scale-105">
+        Entrar
+      </button>
+      
+    </form>
+  </div>
+</main>
