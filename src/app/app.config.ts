@@ -1,13 +1,17 @@
-import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
-import { provideHttpClient } from '@angular/common/http';
-
 import { routes } from './app.routes';
+
+// 1. Importamos la función withInterceptors
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+// 2. Importamos nuestro interceptor recién creado
+import { jwtInterceptor } from './interceptors/jwt-interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideBrowserGlobalErrorListeners(),
+    provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
-    provideHttpClient()
+    // 3. Le decimos al Cartero (HttpClient) que siempre use a nuestro Asistente (jwtInterceptor)
+    provideHttpClient(withInterceptors([jwtInterceptor]))
   ]
 };
